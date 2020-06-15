@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
-import { Globalstyle } from './style/reset'
+import React, { Component } from "react";
+import { Globalstyle } from "./style/reset";
+import Header from "./components/header";
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <div>
         <Globalstyle />
-        Hello
+        <Header />
       </div>
-    )
+    );
   }
 }
 
