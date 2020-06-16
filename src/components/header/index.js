@@ -11,7 +11,7 @@ import {
   Button,
   SearchWraper,
 } from "./style";
-import { SEARCH_FOCUS } from "./store/action-types";
+import { actionCreator } from "./store";
 
 const Header = (props) => {
   const { focused, handleInputFocus, handleInputBlur } = props;
@@ -61,18 +61,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleInputFocus() {
-      const action = {
-        type: SEARCH_FOCUS,
-        value: true,
-      };
-      dispatch(action);
+      dispatch(actionCreator.searchFocus(true));
     },
     handleInputBlur() {
-      const action = {
-        type: SEARCH_FOCUS,
-        value: false,
-      };
-      dispatch(action);
+      dispatch(actionCreator.searchFocus(false));
     },
   };
 };

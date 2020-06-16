@@ -1,4 +1,4 @@
-import { SEARCH_FOCUS } from "./action-types";
+import * as actionTypes from "./action-types";
 
 const defaultState = {
   focused: false,
@@ -6,7 +6,7 @@ const defaultState = {
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case SEARCH_FOCUS:
+    case actionTypes.SEARCH_FOCUS:
       return Object.assign({}, state, { focused: action.value });
     default:
       return state;
