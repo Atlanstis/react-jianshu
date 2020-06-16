@@ -11,7 +11,7 @@ import {
   Button,
   SearchWraper,
 } from "./style";
-import { SEARCH_FOCUS } from "../../store/action-types";
+import { SEARCH_FOCUS } from "./store/action-types";
 
 const Header = (props) => {
   const { focused, handleInputFocus, handleInputBlur } = props;
@@ -54,7 +54,7 @@ const Header = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    focused: state.focused,
+    focused: state.header.focused,
   };
 };
 

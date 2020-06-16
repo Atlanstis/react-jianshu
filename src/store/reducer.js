@@ -1,16 +1,6 @@
-import { SEARCH_FOCUS } from "./action-types";
+import { combineReducers } from "redux";
+import { reducer as headerReducer } from "../components/header/store";
 
-const defaultState = {
-  focused: false,
-};
-
-const reducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case SEARCH_FOCUS:
-      return Object.assign({}, state, { focused: action.value });
-    default:
-      return state;
-  }
-};
-
-export default reducer;
+export default combineReducers({
+  header: headerReducer,
+});
