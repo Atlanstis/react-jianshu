@@ -18,16 +18,34 @@ import {
 import { actionCreator } from "./store";
 
 class Header extends Component {
-  SearchInfoArea(show, list) {
-    if (show) {
+  SearchInfoArea() {
+    let {
+      focused,
+      list,
+      page,
+      mouseIn,
+      handleListPageChange,
+      handleMouseStatus,
+    } = this.props;
+    if (focused || mouseIn) {
+      const showList = list.toJS().slice((page - 1) * 10, page * 10);
       return (
-        <SearchInfo>
+        <SearchInfo
+          onMouseEnter={() => {
+            handleMouseStatus(true);
+          }}
+          onMouseLeave={() => {
+            handleMouseStatus(false);
+          }}
+        >
           <SearchInfoTitle>
             热门搜索
-            <SearchInfoSwitch>换一批</SearchInfoSwitch>
+            <SearchInfoSwitch onClick={handleListPageChange}>
+              换一批
+            </SearchInfoSwitch>
           </SearchInfoTitle>
           <div>
-            {list.map((item, index) => {
+            {showList.map((item, index) => {
               return <SearchInfoItem key={index}>{item}</SearchInfoItem>;
             })}
           </div>
@@ -39,7 +57,7 @@ class Header extends Component {
   }
 
   render() {
-    const { focused, handleInputFocus, handleInputBlur, list } = this.props;
+    const { focused, handleInputFocus, handleInputBlur } = this.props;
     return (
       <HeaderWrapper>
         <Logo href="/" />
@@ -65,7 +83,7 @@ class Header extends Component {
                   : "iconfont icon-search"
               }
             ></i>
-            {this.SearchInfoArea(focused, list)}
+            {this.SearchInfoArea()}
           </SearchWraper>
         </Nav>
         <Addition>
@@ -84,6 +102,8 @@ const mapStateToProps = (state) => {
   return {
     focused: state.getIn(["header", "focused"]),
     list: state.getIn(["header", "list"]),
+    page: state.getIn(["header", "page"]),
+    mouseIn: state.getIn(["header", "mouseIn"]),
   };
 };
 
@@ -95,6 +115,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     handleInputBlur() {
       dispatch(actionCreator.searchFocus(false));
+    },
+    handleListPageChange() {
+      dispatch(actionCreator.listPageChange());
+    },
+    handleMouseStatus(value) {
+      dispatch(actionCreator.mouseStatusChagne(value));
     },
   };
 };

@@ -3,7 +3,10 @@ import { fromJS } from "immutable";
 
 const defaultState = fromJS({
   focused: false,
+  mouseIn: false,
   list: [],
+  page: 1,
+  totalPage: 1,
 });
 
 const reducer = (state = defaultState, action) => {
@@ -11,7 +14,21 @@ const reducer = (state = defaultState, action) => {
     case actionTypes.SEARCH_FOCUS:
       return state.set("focused", action.value);
     case actionTypes.CHANGE_LIST:
-      return state.set("list", fromJS(action.value));
+      return state.merge({
+        list: fromJS(action.value),
+        totalPage: Math.ceil(action.value.length / 10),
+      });
+    case actionTypes.MOUSE_STATUS_CHANGE:
+      return state.set("mouseIn", action.value);
+    case actionTypes.LIST_PAGE_CHANGE:
+      const page = state.get("page");
+      const totalPage = state.get("totalPage");
+      let newPage = (page + 1) % totalPage;
+      if (newPage === 0) {
+        newPage = totalPage;
+      }
+      console.log(newPage);
+      return state.set("page", newPage);
     default:
       return state;
   }

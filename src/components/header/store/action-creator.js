@@ -8,7 +8,20 @@ export const searchFocus = (value) => {
   };
 };
 
-export const changeList = (value) => {
+export const listPageChange = () => {
+  return {
+    type: actionTypes.LIST_PAGE_CHANGE,
+  };
+};
+
+export const mouseStatusChagne = (value) => {
+  return {
+    type: actionTypes.MOUSE_STATUS_CHANGE,
+    value
+  };
+};
+
+const changeList = (value) => {
   return {
     type: actionTypes.CHANGE_LIST,
     value,
