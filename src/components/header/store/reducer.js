@@ -24,10 +24,7 @@ const reducer = (state = defaultState, action) => {
       const page = state.get("page");
       const totalPage = state.get("totalPage");
       let newPage = (page + 1) % totalPage;
-      if (newPage === 0) {
-        newPage = totalPage;
-      }
-      console.log(newPage);
+      newPage = newPage === 0 ? totalPage : newPage
       return state.set("page", newPage);
     default:
       return state;

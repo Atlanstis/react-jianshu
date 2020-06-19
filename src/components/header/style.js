@@ -157,6 +157,16 @@ export const SearchInfoSwitch = styled.span`
   float: right;
   font-size: 13px;
   cursor: pointer;
+  .icon-refresh {
+    display: inline-block;
+    margin-right: 2px;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    transform-origin: center center;
+  }
+  &:hover {
+    color: #222;
+  }
 `;
 
 export const SearchInfoItem = styled.a`

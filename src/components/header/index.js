@@ -40,7 +40,17 @@ class Header extends Component {
         >
           <SearchInfoTitle>
             热门搜索
-            <SearchInfoSwitch onClick={handleListPageChange}>
+            <SearchInfoSwitch
+              onClick={() => {
+                handleListPageChange(this.switchIcon);
+              }}
+            >
+              <i
+                ref={(icon) => {
+                  this.switchIcon = icon;
+                }}
+                className="iconfont icon-refresh"
+              ></i>
               换一批
             </SearchInfoSwitch>
           </SearchInfoTitle>
@@ -116,7 +126,11 @@ const mapDispatchToProps = (dispatch) => {
     handleInputBlur() {
       dispatch(actionCreator.searchFocus(false));
     },
-    handleListPageChange() {
+    handleListPageChange(switchIcon) {
+      let deg = switchIcon.style.transform.replace(/\D/g, "");
+      deg = deg ? Number(deg) : 0;
+      deg += 360;
+      switchIcon.style.transform = `rotate(${deg}deg)`;
       dispatch(actionCreator.listPageChange());
     },
     handleMouseStatus(value) {
