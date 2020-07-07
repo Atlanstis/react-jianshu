@@ -12,10 +12,10 @@ import {
   SearchWraper,
   SearchInfo,
   SearchInfoTitle,
-  SearchInfoSwitch,
   SearchInfoItem,
 } from "./style";
 import { actionCreator } from "./store";
+import SearchInfoSwitch from "../info-switch";
 
 class Header extends Component {
   SearchInfoArea() {
@@ -41,18 +41,8 @@ class Header extends Component {
           <SearchInfoTitle>
             热门搜索
             <SearchInfoSwitch
-              onClick={() => {
-                handleListPageChange(this.switchIcon);
-              }}
-            >
-              <i
-                ref={(icon) => {
-                  this.switchIcon = icon;
-                }}
-                className="iconfont icon-refresh"
-              ></i>
-              换一批
-            </SearchInfoSwitch>
+              onHandleSwitchClick={handleListPageChange}
+            ></SearchInfoSwitch>
           </SearchInfoTitle>
           <div>
             {showList.map((item, index) => {
@@ -128,11 +118,7 @@ const mapDispatchToProps = (dispatch) => {
     handleInputBlur() {
       dispatch(actionCreator.searchFocus(false));
     },
-    handleListPageChange(switchIcon) {
-      let deg = switchIcon.style.transform.replace(/\D/g, "");
-      deg = deg ? Number(deg) : 0;
-      deg += 360;
-      switchIcon.style.transform = `rotate(${deg}deg)`;
+    handleListPageChange() {
       dispatch(actionCreator.listPageChange());
     },
     handleMouseStatus(value) {

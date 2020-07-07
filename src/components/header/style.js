@@ -143,6 +143,7 @@ export const SearchInfo = styled.div`
   top: 58px;
   width: 240px;
   padding: 0 20px;
+  background: #fff;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 `;
 
@@ -151,22 +152,6 @@ export const SearchInfoTitle = styled.div`
   line-height: 20px;
   font-size: 14px;
   color: #969696;
-`;
-
-export const SearchInfoSwitch = styled.span`
-  float: right;
-  font-size: 13px;
-  cursor: pointer;
-  .icon-refresh {
-    display: inline-block;
-    margin-right: 2px;
-    font-size: 13px;
-    transition: all 0.3s ease;
-    transform-origin: center center;
-  }
-  &:hover {
-    color: #222;
-  }
 `;
 
 export const SearchInfoItem = styled.a`
