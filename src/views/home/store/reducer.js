@@ -1,4 +1,5 @@
 import { fromJS } from "immutable";
+import * as actionTypes from "./action-types";
 
 const defaultState = fromJS({
   articleList: [
@@ -11,10 +12,27 @@ const defaultState = fromJS({
         "https://upload-images.jianshu.io/upload_images/6748852-f5632acb7aa5d8f6.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240",
     },
   ],
+  writerList: [],
+  page: 1,
+  totalPage: 1,
 });
 
 const reducer = (state = defaultState, action) => {
-  return state;
+  switch (action.type) {
+    case actionTypes.CHANGE_WRITER_LIST:
+      return state.merge({
+        writerList: fromJS(action.value),
+        totalPage: Math.ceil(action.value.length / 5),
+      });
+    case actionTypes.CHANGE_WRITER_PAGE:
+      const page = state.get("page");
+      const totalPage = state.get("totalPage");
+      let newPage = (page + 1) % totalPage;
+      newPage = newPage === 0 ? totalPage : newPage;
+      return state.set("page", newPage);
+    default:
+      return state;
+  }
 };
 
 export default reducer;
