@@ -1,21 +1,20 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import contentPic from "../../../../static/imgs/content.jpg"
-
 
 class List extends Component {
   render() {
-    const { list } = this.props;
+    let { list } = this.props;
+    list = list.toJS();
     return (
       <div>
         {list.map((item) => {
           return (
-            <ListItem key={item.get("id")}>
-              <img className="pic" alt="" src={contentPic}></img>
+            <ListItem key={item.id}>
+              <img className="pic" alt="" src={item.pic}></img>
               <ListInfo>
-                <h3 className="title">{item.get("title")}</h3>
-                <p className="desc">{item.get("desc")}</p>
+                <h3 className="title">{item.title}</h3>
+                <p className="desc">{item.desc}</p>
               </ListInfo>
             </ListItem>
           );

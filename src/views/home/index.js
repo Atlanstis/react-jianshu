@@ -28,6 +28,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getWriterList();
+    this.props.getArticleList();
   }
 }
 
@@ -39,6 +40,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getWriterList() {
       dispatch(actionCreator.getWriterList());
+    },
+    getArticleList() {
+      dispatch(actionCreator.getArticleList());
     },
   };
 };

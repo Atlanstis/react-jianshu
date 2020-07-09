@@ -9,9 +9,24 @@ export const getWriterList = () => {
   };
 };
 
+export const getArticleList = () => {
+  return (dispatch) => {
+    axios.get("/mock/article-list.json").then(({ data }) => {
+      dispatch(setArticleList(data));
+    });
+  };
+};
+
 export const changeWriterPage = () => {
   return {
     type: actionTypes.CHANGE_WRITER_PAGE,
+  };
+};
+
+const setArticleList = (value) => {
+  return {
+    type: actionTypes.SET_ARTICLE_LIST,
+    value,
   };
 };
 
