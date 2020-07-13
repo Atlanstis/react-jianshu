@@ -6,6 +6,8 @@ const defaultState = fromJS({
   writerList: [],
   page: 1,
   totalPage: 1,
+  articlePage: 1,
+  showScroll: false,
 });
 
 const reducer = (state = defaultState, action) => {
@@ -23,10 +25,14 @@ const reducer = (state = defaultState, action) => {
       return state.set("page", newPage);
     case actionTypes.SET_ARTICLE_LIST:
       let articleList = state.get("articleList").toJS();
+      let articlePage = state.get("articlePage") + 1;
       articleList = articleList.concat(...action.value);
       return state.merge({
         articleList: fromJS(articleList),
+        articlePage,
       });
+    case actionTypes.SET_SCROLL_SHOW:
+      return state.set("showScroll", action.value);
     default:
       return state;
   }

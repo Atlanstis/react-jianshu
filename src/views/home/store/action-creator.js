@@ -9,9 +9,9 @@ export const getWriterList = () => {
   };
 };
 
-export const getArticleList = () => {
+export const getArticleList = (page) => {
   return (dispatch) => {
-    axios.get("/mock/article-list.json").then(({ data }) => {
+    axios.get(`/mock/article-list.json?page=${page}`).then(({ data }) => {
       dispatch(setArticleList(data));
     });
   };
@@ -20,6 +20,13 @@ export const getArticleList = () => {
 export const changeWriterPage = () => {
   return {
     type: actionTypes.CHANGE_WRITER_PAGE,
+  };
+};
+
+export const changeScrollShow = (value) => {
+  return {
+    type: actionTypes.SET_SCROLL_SHOW,
+    value,
   };
 };
 

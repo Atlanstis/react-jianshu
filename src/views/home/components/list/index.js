@@ -1,22 +1,25 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-class List extends Component {
+class List extends PureComponent {
   render() {
     let { list } = this.props;
     list = list.toJS();
     return (
       <div>
-        {list.map((item) => {
+        {list.map((item, index) => {
           return (
-            <ListItem key={item.id}>
-              <img className="pic" alt="" src={item.pic}></img>
-              <ListInfo>
-                <h3 className="title">{item.title}</h3>
-                <p className="desc">{item.desc}</p>
-              </ListInfo>
-            </ListItem>
+            <Link key={index} to="detail">
+              <ListItem>
+                <img className="pic" alt="" src={item.pic}></img>
+                <ListInfo>
+                  <h3 className="title">{item.title}</h3>
+                  <p className="desc">{item.desc}</p>
+                </ListInfo>
+              </ListItem>
+            </Link>
           );
         })}
       </div>

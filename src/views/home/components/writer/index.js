@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import InfoSwitch from "../../../../components/info-switch";
 import { actionCreator } from "../../store";
 
-class Writer extends Component {
+class Writer extends PureComponent {
   constructor(props) {
     super(props);
     this.handleSwitchClick = this.handleSwitchClick.bind(this);
@@ -12,7 +12,7 @@ class Writer extends Component {
   }
 
   handleSwitchClick() {
-    this.props.changeList()
+    this.props.changeList();
   }
 
   writerArea() {
